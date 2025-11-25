@@ -1,5 +1,6 @@
 # Imagen base de Python
 FROM python:3.11-slim
+
 # Evitar .pyc y buffers
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
@@ -23,8 +24,8 @@ RUN curl -L "https://huggingface.co/garavv/arcface-onnx/resolve/main/arc.onnx?do
 # Copiar el resto del código
 COPY . .
 
-# Puerto que usará Cloud Run
+# Cloud Run nos da un PORT (por defecto 8080)
 ENV PORT=8080
 
-# Comando de arranque
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+# Arrancar usando el PORT que defina Cloud Run
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT}"]
