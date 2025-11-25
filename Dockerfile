@@ -21,11 +21,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN mkdir -p models
 RUN curl -L "https://huggingface.co/garavv/arcface-onnx/resolve/main/arc.onnx?download=true" -o models/arcface.onnx
 
-# Copiar el resto del código
+# Copiar el resto del código (incluye main.py, arcface_service.py, face_store.py y start.py)
 COPY . .
 
 # Cloud Run nos da un PORT (por defecto 8080)
 ENV PORT=8080
 
-# Arrancar usando el PORT que defina Cloud Run
-CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT}"]
+# Comando de arranque: usamos nuestro script start.py
+CMD ["python", "start.py"]
