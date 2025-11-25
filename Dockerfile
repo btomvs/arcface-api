@@ -1,6 +1,5 @@
 # Imagen base de Python
 FROM python:3.11-slim
-
 # Evitar .pyc y buffers
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
