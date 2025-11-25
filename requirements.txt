@@ -3,5 +3,5 @@ uvicorn[standard]
 python-multipart
 opencv-python
 numpy
-onnx
 onnxruntime
+Pillow
