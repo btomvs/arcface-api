@@ -1,0 +1,15 @@
+# Entorno virtual
+.venv/
+
+# Cachés de Python
+__pycache__/
+*.pyc
+
+# Carpeta de embeddings generados
+embeddings/
+
+# Carpeta temporal
+tmp/
+
+# Modelo grande: no subirlo al repo
+models/arcface.onnx
