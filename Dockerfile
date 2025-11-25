@@ -20,7 +20,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Crear carpeta de modelos y descargar arcface.onnx desde HuggingFace
 RUN mkdir -p models
 # 👉 AQUÍ pega la URL directa de descarga del modelo
-RUN curl -L "URL_DIRECTA_DEL_ARCFACE_ONNX" -o models/arcface.onnx
+RUN curl -L "wget https://huggingface.co/garavv/arcface-onnx/resolve/main/arc.onnx?download=true -O arcface.onnx
+" -o models/arcface.onnx
 
 # Copiar el resto del código
 COPY . .
