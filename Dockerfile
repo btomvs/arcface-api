@@ -1,26 +1,31 @@
 # Imagen base de Python
 FROM python:3.11-slim
 
-# Para que Python no bufee la salida ni genere .pyc
+# Evitar .pyc y buffers
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
 
 # Carpeta de trabajo
 WORKDIR /app
 
-# Dependencias del sistema necesarias para opencv/onnxruntime (mínimas)
+# Dependencias del sistema para opencv/onnx y curl
 RUN apt-get update && apt-get install -y \
-    libgl1 libglib2.0-0 \
+    libgl1 libglib2.0-0 curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copiar requirements e instalar
+# Copiar requirements e instalarlos
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+
+# Crear carpeta de modelos y descargar arcface.onnx desde HuggingFace
+RUN mkdir -p models
+# 👉 AQUÍ pega la URL directa de descarga del modelo
+RUN curl -L "URL_DIRECTA_DEL_ARCFACE_ONNX" -o models/arcface.onnx
 
 # Copiar el resto del código
 COPY . .
 
-# Cloud Run expone el puerto 8080
+# Puerto que usará Cloud Run
 ENV PORT=8080
 
 # Comando de arranque
