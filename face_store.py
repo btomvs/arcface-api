@@ -59,3 +59,23 @@ class FaceStore:
     p = self._path_for(user_id)
     if p.exists():
       p.unlink()
+
+  # ---------- Listar usuarios enrolados ----------
+  def list_users(self) -> list[str]:
+    """
+    Devuelve una lista con los IDs de usuario que tienen al menos
+    un archivo de embeddings guardado.
+    """
+    if not self.base_dir.exists():
+      return []
+
+    users: list[str] = []
+    for p in self.base_dir.iterdir():
+      # Usamos solo archivos .npy -> p.stem es el user_id original
+      if p.is_file() and p.suffix == ".npy":
+        users.append(p.stem)
+
+    # Opcional: devolver ordenados
+    users.sort()
+    return users
+
