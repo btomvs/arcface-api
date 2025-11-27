@@ -4,8 +4,9 @@ from typing import Union, Tuple
 
 import numpy as np
 import onnxruntime as ort
-from PIL import Image
+from PIL import Image, ImageOps
 import cv2
+
 
 
 class ArcFaceService:
